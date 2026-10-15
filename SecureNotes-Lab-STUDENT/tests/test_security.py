@@ -19,57 +19,37 @@ def test_protected_route_rejects_no_token(client):
 def test_protected_route_rejects_bad_token(client):
     # Call GET /notes with a junk token, e.g. auth("not.a.jwt").
     # Assert 401 — the app must fail closed on an invalid token.
-    result = client.get("/notes", headers=auth("not.a.jwt"))
-    assert result.status_code == 401
+    assert False, "TODO: write test_protected_route_rejects_bad_token"
 
 
 # ----- TODO 2  (A01 — the big one) ----------------------------------------
 def test_user_cannot_read_another_users_note(client):
     # Log in as alice. Try GET /notes/2 (that note belongs to Bob).
     # Assert 403 — ownership must be enforced.
-    token = login(client, "alice", "alicepass")
-    result = client.get("/notes/2", headers=auth(token))
-    assert result.status_code == 403
+    assert False, "TODO: write test_user_cannot_read_another_users_note"
 
 
 # ----- TODO 3 -------------------------------------------------------------
 def test_user_can_read_own_note(client):
     # Log in as alice. GET /notes/1 (hers). Assert 200.
-    token = login(client, "alice", "alicepass")
-    result = client.get("/notes/1", headers=auth(token))
-    assert result.status_code == 200
+    assert False, "TODO: write test_user_can_read_own_note"
 
 
 # ----- TODO 4  (A07 — no user enumeration) --------------------------------
 def test_login_does_not_reveal_which_field_was_wrong(client):
     # POST /login once with a username that doesn't exist, once with a real
     # username but wrong password. Assert the two error bodies are IDENTICAL.
-    unknown_user = client.post(
-        "/login", json={"username": "unknown", "password": "alicepass"}
-    )
-    wrong_password = client.post(
-        "/login", json={"username": "alice", "password": "wrongpass"}
-    )
-    assert unknown_user.status_code == 401
-    assert wrong_password.status_code == 401
-    assert unknown_user.json() == wrong_password.json()
+    assert False, "TODO: write test_login_does_not_reveal_which_field_was_wrong"
 
 
 # ----- TODO 5  (A01 — role) -----------------------------------------------
 def test_non_admin_cannot_list_users(client):
     # Log in as alice (not an admin). GET /admin/users. Assert 403.
-    token = login(client, "alice", "alicepass")
-    result = client.get("/admin/users", headers=auth(token))
-    assert result.status_code == 403
+    assert False, "TODO: write test_non_admin_cannot_list_users"
 
 
 # ----- TODO 6  (A04 — no hash leak) ---------------------------------------
 def test_admin_can_list_users_without_password_leak(client):
     # Log in as admin. GET /admin/users. Assert 200 AND no item in the
     # response contains a "password" field.
-    token = login(client, "admin", "admin123")
-    result = client.get("/admin/users", headers=auth(token))
-    assert result.status_code == 200
-    for user in result.json():
-        assert set(user) == {"id", "username", "is_admin"}
-        assert "password" not in user
+    assert False, "TODO: write test_admin_can_list_users_without_password_leak"
