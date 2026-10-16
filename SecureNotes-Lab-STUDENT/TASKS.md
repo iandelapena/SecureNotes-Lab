@@ -9,6 +9,7 @@
 
 ## Part B — write the tests (`tests/`)
 API (`test_api.py`)
+- [x] home endpoint returns the expected successful response
 - [x] register then login returns a JWT (three dotted parts)
 - [x] wrong password returns 401
 - [x] create a note, then see it in your list
@@ -21,7 +22,11 @@ Security (`test_security.py`)
 - [x] a non-admin can't list users (403)  ← A01
 - [x] admin list has no password field  ← A04
 
-**Goal:** all 5 tasks done AND all 11 tests green (`pytest -q`). Then `pytest --cov=app`.
+**Goal:** all 5 tasks done AND all 11 tests green (`python -m pytest -q`). Then run
+`python -m pytest --cov=app .`.
+
+The complete suite contains 11 independent tests and uses the fresh-database fixture for every
+test.
 
 ## Reflection (4–5 sentences)
 Pick one security test. Explain what it checks, which OWASP risk it guards, and what would break in the
@@ -31,3 +36,12 @@ The unauthorized note access test checks that a user cannot read another user's 
 broken access control (A01), because the API must check the note owner instead of trusting the note ID.
 If the ownership check were deleted, Alice could read Bob's private notes by requesting their IDs.
 The test makes this security rule visible and helps prevent the mistake from returning in a later change.
+
+## Part C — peer review and submission
+- [x] Work is on the `secure-and-test` branch
+- [ ] Open a pull request from `secure-and-test` into `main`
+- [ ] Review a classmate's pull request with comments and an Approve or Request changes verdict
+- [ ] Submit the repository, own pull request, and reviewed pull request links through the LMS
+
+The GitHub peer-review steps remain pending until they are completed on GitHub; no review links are
+invented here.
