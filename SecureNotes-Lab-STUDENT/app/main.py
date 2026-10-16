@@ -58,7 +58,10 @@ def hash_password(raw: str) -> str:
     return pwd.hash(raw)
 
 def verify_password(raw: str, hashed: str) -> bool:
-    return pwd.verify(raw, hashed)
+    try:
+        return pwd.verify(raw, hashed)
+    except (ValueError, TypeError):
+        return False
 # <<< END TASK 1
 
 

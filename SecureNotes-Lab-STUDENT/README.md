@@ -9,8 +9,8 @@ One lab, two halves:
 python -m venv venv
 # Windows:  venv\Scripts\activate   ·   macOS/Linux:  source venv/bin/activate
 pip install -r requirements.txt
-uvicorn app.main:app --reload     # the app (fake security for now)
-pytest -q                         # the tests: 2 pass, the rest are TODO (red)
+uvicorn app.main:app --reload     # run the API with JWT and bcrypt security
+pytest -q                         # run the 11 security and API tests
 ```
 Open http://127.0.0.1:8000/docs. Accounts: `admin/admin123`, `alice/alicepass` (note 1), `bob/bobpass` (note 2).
 
@@ -18,12 +18,14 @@ Open http://127.0.0.1:8000/docs. Accounts: `admin/admin123`, `alice/alicepass` (
 
 ## What you edit
 - **Part A:** `app/main.py`, only inside the `>>> TASK n ... <<< END TASK n` markers.
-- **Part B:** `tests/test_api.py` and `tests/test_security.py` — replace each `assert False, "TODO..."`.
-  (`tests/conftest.py` gives you the `client` fixture and `login` / `auth` helpers — don't edit it.)
+- **Part B:** `tests/test_api.py` and `tests/test_security.py` — the suite proves the required
+  authentication, authorization, ownership, and password-hash protections.
+  (`tests/conftest.py` gives you the `client` fixture and `login` / `auth` helpers.)
 
-**The payoff:** the tests you write in Part B are the proof your Part A works. When your auth is
-correct, your tests go green. See the handout and `TASKS.md`.
+**The payoff:** the tests in Part B are executable proof that the authentication and authorization
+rules remain enforced. See the handout and `TASKS.md`.
 
-## Part D — peer review on GitHub
-Push to a public repo, commit the starter first, then your work on a `secure-and-test` branch, and open
-a pull request for a partner pair to review. See the handout (Part D).
+## Part C — peer review on GitHub
+The required peer review and LMS submission links must be completed separately. Do not mark the
+peer review complete until a classmate's pull request has been reviewed with comments and an
+Approve or Request changes verdict.
